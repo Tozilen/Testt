@@ -1,7 +1,21 @@
-шапка
+L726
+GOTO N1
 T="d20"
-раздел
+M06
+STOPRE
+M113
+M67
+MO
 T="d10_chern"
-раздел
+M06
+STOPRE
+M113
+M67
+MO
 T="d40r6"
-конец
+M06
+STOPRE
+M113
+M67
+MO
+M30

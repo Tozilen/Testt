@@ -30,6 +30,7 @@ def read_and_copy_files(input_folder, header_file, separator_file, footer_file, 
         for text in texts[1:]:
             result.append(separator)
             result.append(text)
+        result.append(separator)
     result.append(footer)
 
     with open(output_file, 'w') as file:
