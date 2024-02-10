@@ -1,0 +1,121 @@
+N1 ; # # # # # # # # # # # # # # # # # # # # # # # # #
+N2 ; (MODEL: 58000_03_15_283_setup_1_DMG.prt)
+N3 ; (OPERATION_37 : 5_10_CHIST : Planar Milling)
+N4 ; (FREZA: D=12.00; R=0.50; L=75.00)
+N5 ; # # # # # # # # # # # # # # # # # # # # # # # # #
+N6 ;
+N7 DIAMOF; x is radius
+N8 G0 G53 X460. D0
+N9 G0 G53 Y-95. D0
+N10 D1
+N11 T="D12R0.5_CHIST"
+;NCG#tc#dmg_eqiment_uc_turn_sl.com#TC#*NCG;*RO*;*HD*
+;#"Смена инструмента"#1##1##1#1##3##1##0#1#1#14#992700#3#""#""#""#""###82#100#80#80#0#0###1#0#0#"1"##"1"#"1"#*NCG;*RO*;*HD*
+N12 TC(2,0,0,1,180,0)  ;Tool change
+;#END#*NCG;*RO*;*HD*
+N13     ;1 - nomer korrektora D
+N14     ;0 - povorot dlya revolvera
+N15     ;0 - gnezdoo v revolvere
+N16     ;1 - zadanie mesta rezaniya dlya instr
+N17     ; Ugol B1 posle smeni instrumenta
+N18     ; Ugol C1 posle smeni instrumenta 
+N19 TOWSTD; uchet iznosa instr po dline
+N20 G54
+N21 ;
+N22 ;--- CS MAIN found. Work in LEFT spindle ---
+N23 ;
+N24 ;--- First Z= -113.14791
+N25 M814; salazki dlya shpindelya C4
+N26 DIAMOF; x is radius
+N27 M313; snyat s tormozov C3
+N28 M413; snyat s tormozov C4
+N29 G4 F.2
+N30 L707(0); vkluchenie oci C4 i vihod v ugol
+N31 SETMS(1); set master spindel C1
+N32 G17 G642 SOFT
+N33 S1=2000 M1=3
+N34 G0 B1=90. C4=DC(90.)
+N35 CYCLE832(0.01,112001)
+N36 TRANS_5A(4,"BC",1)
+;N37 Y60. Z-113.148
+;N38 X-18.5
+N39 AROT X-90.
+N40 AROT Z90.
+N41 M107 m350
+N42 M312; stavit na tormoz C3
+N43 M412; stavit na tormoz C4
+N44 G94
+N45 G0 X113.148 Y18.5 Z60.
+N46 Z29.
+N47 G1 Z26. F400.
+N48 X101.148
+N49 X53.022
+N50 X51.811 Y18.442
+N51 X50.616 Y18.239
+N52 X49.451 Y17.903
+N53 X48.331 Y17.439
+N54 X47.27 Y16.853
+N55 X46.282 Y16.152
+N56 X45.378 Y15.344
+N57 X44.57 Y14.44
+N58 X43.868 Y13.451
+N59 X43.282 Y12.39
+N60 X42.818 Y11.27
+N61 X42.483 Y10.105
+N62 X42.28 Y8.91
+N63 X42.222 Y7.7
+N64 Z32.
+N65 G0 Z60.
+N66 X113.148 Y18.5
+N67 Z28.5
+N68 G1 Z25.5
+N69 X101.148
+N70 X53.022
+N71 X51.811 Y18.442
+N72 X50.616 Y18.239
+N73 X49.451 Y17.903
+N74 X48.331 Y17.439
+N75 X47.27 Y16.853
+N76 X46.282 Y16.152
+N77 X45.378 Y15.344
+N78 X44.57 Y14.44
+N79 X43.868 Y13.451
+N80 X43.282 Y12.39
+N81 X42.818 Y11.27
+N82 X42.483 Y10.105
+N83 X42.28 Y8.91
+N84 X42.222 Y7.7
+N85 Z31.5
+N86 G0 Z60.
+N87 X113.148 Y18.5
+N88 Z28.
+N89 G1 Z25.
+N90 X101.148
+N91 X53.022
+N92 X51.811 Y18.442
+N93 X50.616 Y18.239
+N94 X49.451 Y17.903
+N95 X48.331 Y17.439
+N96 X47.27 Y16.853
+N97 X46.282 Y16.152
+N98 X45.378 Y15.344
+N99 X44.57 Y14.44
+N100 X43.868 Y13.451
+N101 X43.282 Y12.39
+N102 X42.818 Y11.27
+N103 X42.483 Y10.105
+N104 X42.28 Y8.91
+N105 X42.222 Y7.7
+N106 Z31.
+N107 G0 Z60.
+N108 TRANS_OFF
+N109 ROT
+N110 CYCLE832()
+N111 M1=5 M109 m351
+N112 M413; snyat s tormozov C4
+N113 M313; snyat s tormozov C3
+N114 DIAMOF; x is radius
+N115 G0 G53 X460. D0
+N116 G0 G53 Y-95. D0
+N117 D1
+N118 M17

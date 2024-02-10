@@ -1,0 +1,87 @@
+N1 ; # # # # # # # # # # # # # # # # # # # # # # # # #
+N2 ; (MODEL: 58000_03_15_283_setup_1_DMG.prt)
+N3 ; (OPERATION_11 : 1_9_DOBOR : Planar Milling)
+N4 ; (FREZA: D=25.00; R=5.00; L=75.00)
+N5 ; # # # # # # # # # # # # # # # # # # # # # # # # #
+N6 ;
+N7 DIAMOF; x is radius
+N8 G0 G53 X460. D0
+N9 G0 G53 Y-95. D0
+N10 D1
+N11 T="D25R5Z3"
+N12 TC(1,0,0,1,180,0)
+N13     ;1 - nomer korrektora D
+N14     ;0 - povorot dlya revolvera
+N15     ;0 - gnezdoo v revolvere
+N16     ;1 - zadanie mesta rezaniya dlya instr
+N17     ; Ugol B1 posle smeni instrumenta
+N18     ; Ugol C1 posle smeni instrumenta 
+N19 TOWSTD; uchet iznosa instr po dline
+N20 G54
+N21 ;
+N22 ;--- CS MAIN found. Work in LEFT spindle ---
+N23 ;
+N24 ;--- First Z= -93.83530
+N25 M814; salazki dlya shpindelya C4
+N26 DIAMOF; x is radius
+N27 M313; snyat s tormozov C3
+N28 M413; snyat s tormozov C4
+N29 G4 F.2
+N30 L707(0); vkluchenie oci C4 i vihod v ugol
+N31 SETMS(1); set master spindel C1
+N32 S1=3800 M1=3
+N33 G17 G642 SOFT
+N34 G0 B1=90. C4=DC(180.)
+N35 CYCLE832(0.01,112001)
+N36 TRANS_5A(4,"BC",1)
+;N37 Y-29.023 Z-93.835
+;N38 X-60.
+N39 AROT Y-90.
+N40 AROT Z180.
+N41 M122
+N42 M312; stavit na tormoz C3
+N43 M412; stavit na tormoz C4
+N44 G94
+N45 G0 X93.835 Y29.023 Z60.
+N46 Z25.7
+N47 G1 Z22.7 F3500.
+N48 X93.093 Y4.034
+N49 G3 X92.771 Y-24.708 I777.407 J-23.094
+N50 G1 X92.952 Y-49.707
+N51 Z25.7
+N52 G0 Z60.
+N53 X82.59 Y29.357
+N54 Z25.7
+N55 G1 Z22.7
+N56 X81.848 Y4.368
+N57 G3 X81.521 Y-24.789 I788.652 J-23.428
+N58 G1 X81.702 Y-49.789
+N59 Z25.7
+N60 G0 Z60.
+N61 X71.345 Y29.691
+N62 Z25.7
+N63 G1 Z22.7
+N64 X70.603 Y4.703
+N65 G3 X70.271 Y-24.871 I799.897 J-23.763
+N66 G1 X70.453 Y-49.87
+N67 Z25.7
+N68 G0 Z60.
+N69 X60.1 Y30.026
+N70 Z25.7
+N71 G1 Z22.7
+N72 X59.358 Y5.037
+N73 G3 X59.021 Y-24.953 I811.142 J-24.097
+N74 G1 X59.203 Y-49.952
+N75 Z25.7
+N76 G0 Z60.
+N77 TRANS_OFF
+N78 ROT
+N79 CYCLE832()
+N80 M1=5 M109
+N81 M413; snyat s tormozov C4
+N82 M313; snyat s tormozov C3
+N83 DIAMOF; x is radius
+N84 G0 G53 X460. D0
+N85 G0 G53 Y-95. D0
+N86 D1
+N87 M17

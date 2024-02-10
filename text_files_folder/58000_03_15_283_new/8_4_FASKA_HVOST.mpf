@@ -1,0 +1,67 @@
+N1 ; # # # # # # # # # # # # # # # # # # # # # # # # #
+N2 ; (MODEL: 58000_03_15_283_setup_1_DMG.prt)
+N3 ; (OPERATION_59 : 8_4_FASKA_HVOST : Planar Milling)
+N4 ; (FREZA: D=12.00; R=0.00; L=75.00)
+N5 ; # # # # # # # # # # # # # # # # # # # # # # # # #
+N6 ;
+N7 DIAMOF; x is radius
+N8 G0 G53 X460. D0
+N9 G0 G53 Y-95. D0
+N10 D1
+N11 T="D12A45"
+;NCG#tc#dmg_eqiment_uc_turn_sl.com#TC#*NCG;*RO*;*HD*
+;#"Смена инструмента"#1##1##1#1##3##1##0#1#1#14#992700#3#""#""#""#""###82#100#80#80#0#0###1#0#0#"1"##"1"#"1"#*NCG;*RO*;*HD*
+N12 TC(2,0,0,1,180,0)  ;Tool change
+;#END#*NCG;*RO*;*HD*
+N13     ;1 - nomer korrektora D
+N14     ;0 - povorot dlya revolvera
+N15     ;0 - gnezdoo v revolvere
+N16     ;1 - zadanie mesta rezaniya dlya instr
+N17     ; Ugol B1 posle smeni instrumenta
+N18     ; Ugol C1 posle smeni instrumenta 
+N19 TOWSTD; uchet iznosa instr po dline
+N20 G57
+N21 ;
+N22 ;--- CS MAIN found. Work in LEFT spindle ---
+N23 ;
+N24 ;--- First Z= -53.57531
+N25 M814; salazki dlya shpindelya C4
+N26 DIAMOF; x is radius
+N27 M313; snyat s tormozov C3
+N28 M413; snyat s tormozov C4
+N29 G4 F.2
+N30 L707(0); vkluchenie oci C4 i vihod v ugol
+N31 SETMS(1); set master spindel C1
+N32 S1=8000 M1=3
+N33 G17 G642 SOFT
+N34 G0 B1=90. C4=DC(0.0)
+N35 CYCLE832(0.01,112001)
+N36 TRANS_5A(4,"BC",1)
+;N37 Y-32.178 Z-53.575
+;N38 X60.
+N39 AROT Y90.
+N40 M107 M350
+N41 M312; stavit na tormoz C3
+N42 M412; stavit na tormoz C4
+N43 G94
+N44 G0 X53.575 Y-32.178 Z60.
+N45 Z12.5
+N46 G1 Z9.5 F400.
+N47 X53.197 Y-25.188
+N48 X52.704 Y-15.116
+N49 X52.345 Y-5.039
+N50 X52.12 Y5.043
+N51 X52. Y12.042
+N52 Z12.5
+N53 G0 Z60.
+N54 TRANS_OFF
+N55 ROT
+N56 CYCLE832()
+N57 M1=5 M109 M351
+N58 M413; snyat s tormozov C4
+N59 M313; snyat s tormozov C3
+N60 DIAMOF; x is radius
+N61 G0 G53 X460. D0
+N62 G0 G53 Y-95. D0
+N63 D1
+N64 M17
