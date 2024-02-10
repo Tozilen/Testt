@@ -1,8 +1,0 @@
-Header: L726
-GOTO N1
-Separator: M06
-STOPRE
-M113
-M67
-MO
-Footer: M30

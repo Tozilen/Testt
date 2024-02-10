@@ -1,6 +1,7 @@
 import os
 import re
 import logging
+import json  # Добавили импорт json
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -10,19 +11,22 @@ from kivy.uix.textinput import TextInput
 INPUT_FOLDER = "text_files_folder"
 OUTPUT_FILE = 'results.txt'
 FILES_LIST_FILE = 'spisok_failov.txt'
-SETTINGS_FILE = 'settings.txt'  # Файл для сохранения настроек
+SETTINGS_FILE = 'settings.json'  # Изменили расширение файла на .json
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class MultiLineTextInput(TextInput):
-    """Класс для создания многострочного ввода."""
-    pass
-
 class ToolCheckerApp(App):
     def build(self):
         return ToolCheckerBoxLayout()
+
+class MultiLineTextInput(TextInput):
+    def keyboard_on_key_down(self, window, keycode, text, modifiers):
+        if keycode[0] == 13:  # Отлавливаем нажатие Enter
+            self.insert_text('\n')  # Вставляем символ новой строки
+        else:
+            super(MultiLineTextInput, self).keyboard_on_key_down(window, keycode, text, modifiers)
 
 class ToolCheckerBoxLayout(BoxLayout):
     def __init__(self, **kwargs):
@@ -30,15 +34,15 @@ class ToolCheckerBoxLayout(BoxLayout):
         self.orientation = 'vertical'
 
         # Форма для заголовка
-        self.header_input = MultiLineTextInput(hint_text='Введите заголовок')
+        self.header_input = MultiLineTextInput(hint_text='Введите заголовок', multiline=True)
         self.add_widget(self.header_input)
 
         # Форма для разделителя
-        self.separator_input = MultiLineTextInput(hint_text='Введите разделитель')
+        self.separator_input = MultiLineTextInput(hint_text='Введите разделитель', multiline=True)
         self.add_widget(self.separator_input)
 
         # Форма для футера
-        self.footer_input = MultiLineTextInput(hint_text='Введите футер')
+        self.footer_input = MultiLineTextInput(hint_text='Введите футер', multiline=True)
         self.add_widget(self.footer_input)
 
         # Атрибуты для хранения значений
@@ -114,25 +118,23 @@ class ToolCheckerBoxLayout(BoxLayout):
 
     def save_settings(self):
         """Сохранение настроек в файл."""
+        settings = {
+            "Header": self.header_value,
+            "Separator": self.separator_value,
+            "Footer": self.footer_value
+        }
+
         with open(SETTINGS_FILE, 'w', encoding='utf-8') as file:
-            file.write(f"Header: {self.header_value}\n")
-            file.write(f"Separator: {self.separator_value}\n")
-            file.write(f"Footer: {self.footer_value}\n")
+            json.dump(settings, file)
 
     def load_settings(self):
         """Загрузка сохраненных настроек из файла."""
         if os.path.isfile(SETTINGS_FILE):
             with open(SETTINGS_FILE, 'r', encoding='utf-8') as file:
-                for line in file:
-                    parts = line.strip().split(': ')
-                    if len(parts) == 2:
-                        key, value = parts
-                        if key == "Header":
-                            self.header_input.text = value
-                        elif key == "Separator":
-                            self.separator_input.text = value
-                        elif key == "Footer":
-                            self.footer_input.text = value
+                settings = json.load(file)
+                self.header_input.text = settings.get("Header", "")
+                self.separator_input.text = settings.get("Separator", "")
+                self.footer_input.text = settings.get("Footer", "")
 
 if __name__ == '__main__':
     ToolCheckerApp().run()
